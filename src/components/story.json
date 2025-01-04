@@ -8,86 +8,75 @@
       ]
     },
     "2": {
+      "text": "As you approach the slot machine, you remember your wife's warning about gambling. What do you do?",
+      "choices": [
+        { "text": "Ignore the warning and play", "next": "3" },
+        { "text": "Heed the warning and leave", "next": "win3" }
+      ]
+    },
+    "3": {
       "text": "You step inside the casino. The bright lights and sounds captivate you. A slot machine beckons. Do you play?",
       "choices": [
-        { "text": "Play the slot machine", "next": "3" },
+        { "text": "Play the slot machine", "next": "4" },
         { "text": "Leave the casino", "next": "win2" }
       ],
       "moneyChange": -10
     },
-    "3": {
-      "text": "You play the slot machine. The reels spin, and you lose $20. What do you do next?",
-      "choices": [
-        { "text": "Play again", "next": "4" },
-        { "text": "Leave with your losses", "next": "lose2" }
-      ],
-      "moneyChange": -10
-    },
     "4": {
-      "text": "You play again, losing another $20. The thrill is addictive. What now?",
+      "text": "You play the slot machine. The reels spin, and you lose $20. What do you do next?",
       "choices": [
         { "text": "Play again", "next": "5" },
         { "text": "Leave with your losses", "next": "lose2" }
       ],
-      "moneyChange": -10
+      "moneyChange": -20
     },
     "5": {
-      "text": "You win $100! But the excitement lures you to keep playing. What do you do?",
+      "text": "You play again, losing another $20. The thrill is addictive. What now?",
       "choices": [
         { "text": "Play again", "next": "6" },
-        { "text": "Cash out and leave", "next": "win3" }
+        { "text": "Leave with your losses", "next": "lose2" }
       ],
-      "moneyChange": 100
-    },
-    "6": {
-      "text": "You keep playing and lose everything. Now you have no money left. What do you do?",
-      "choices": [
-        { "text": "Sell your house for $200", "next": "7", "moneyChange": 200 },
-        { "text": "Sell your car for $100", "next": "8", "moneyChange": 100 },
-        { "text": "Give up", "next": "lose3" }
-      ]
-    },
-    "7": {
-      "text": "You sold your house and now have $200. The casino beckons you to continue. What do you do?",
-      "choices": [
-        { "text": "Play again", "next": "9" }
-      ]
-    },
-    "8": {
-      "text": "You sold your car and now have $100. The casino beckons you to continue. What do you do?",
-      "choices": [
-        { "text": "Play again", "next": "9" }
-      ]
-    },
-    "9": {
-      "text": "You lose everything again, including what you sold. You’ve hit rock bottom.",
-      "choices": [],
-      "outcome": "lose3"
+      "moneyChange": -20
     },
     "win1": {
-      "text": "You resist the temptation and walk away. Your family is proud of you, and life continues happily.",
-      "choices": [],
-      "outcome": "win"
+      "text": "You walk away from the casino, feeling proud of your self-control. You go home to your family.",
+      "choices": [
+        { "text": "Talk to Wife", "next": "talkToWife" },
+        { "text": "Go to Work", "next": "goToWork" }
+      ]
     },
     "win2": {
-      "text": "You leave the casino, having spent nothing. You avoided a dangerous trap.",
-      "choices": [],
-      "outcome": "win"
+      "text": "You leave the casino before spending any money. You feel relieved and go home.",
+      "choices": [
+        { "text": "Talk to Wife", "next": "talkToWife" },
+        { "text": "Go to Work", "next": "goToWork" }
+      ]
     },
     "win3": {
-      "text": "You cashed out while ahead. You escaped the gambling trap this time.",
-      "choices": [],
-      "outcome": "win"
+      "text": "You heed your wife's warning and leave the casino. You feel grateful for her advice.",
+      "choices": [
+        { "text": "Talk to Wife", "next": "talkToWife" },
+        { "text": "Go to Work", "next": "goToWork" }
+      ]
     },
     "lose2": {
-      "text": "You leave the casino with less money. The experience leaves you questioning your choices.",
-      "choices": [],
-      "outcome": "escaped"
+      "text": "You leave the casino with your losses, feeling regretful. You go home to your family.",
+      "choices": [
+        { "text": "Talk to Wife", "next": "talkToWife" },
+        { "text": "Go to Work", "next": "goToWork" }
+      ]
     },
-    "lose3": {
-      "text": "You lost everything, including your house, car, and dignity. This is the end.",
-      "choices": [],
-      "outcome": "lose"
+    "talkToWife": {
+      "text": "You talked to your wife. She is happy to see you home.",
+      "choices": [
+        { "text": "Back to Menu", "next": "menu" }
+      ]
+    },
+    "goToWork": {
+      "text": "You went to work. You earned some money and your wife is happy.",
+      "choices": [
+        { "text": "Back to Menu", "next": "menu" }
+      ]
     }
   }
 }

@@ -38,6 +38,7 @@ const Game = ({ onGameOver }) => {
   };
 
   const handleSlotResult = () => {
+  setTimeout(() => {
     setIsSpinning(false);
 
     // Apply money change after spinning stops
@@ -47,42 +48,41 @@ const Game = ({ onGameOver }) => {
     }
 
     setSceneId(scene.choices.find((choice) => choice.text.includes("Play again"))?.next || "3");
-  };
+  }, 2000); // 2000 milliseconds = 2 seconds
+};
 
-  return (
+return (
+  <div
+    className="h-screen w-screen flex flex-col justify-end items-center bg-cover bg-center"
+    style={{ backgroundImage: 'url("/public/background.png")' }}
+  >
+    {isSpinning && (
+      <div
+        className="absolute"
+        style={{ bottom: "140px", right: "10%", transform: "translateY(-50%)" }}
+      >
+        <SlotMachine onResult={handleSlotResult} />
+      </div>
+    )}
+
     <div
-      className="h-screen w-screen flex flex-col justify-end items-center bg-cover bg-center"
-      style={{ backgroundImage: 'url("/public/background.png")' }}
+      className="w-5/6 bg-gray-900 bg-opacity-75 text-white p-6 rounded-lg mb-4"
     >
-      {isSpinning && (
-        <div
-          className="absolute"
-          style={{ bottom: "140px", right: "10%", transform: "translateY(-50%)" }}
-        >
-          <SlotMachine onResult={handleSlotResult} />
-        </div>
-      )}
-
-      {!isSpinning && (
-        <div
-          className="w-5/6 bg-gray-900 bg-opacity-75 text-white p-6 rounded-lg mb-4"
-        >
-          <p className="mb-4 text-center">{scene.text.replace("[spent]", spent)}</p>
-          <p className="text-center">Money: ${money}</p>
-          <div className="flex justify-center space-x-4 mt-4">
-            {scene.choices.map((choice, index) => (
-              <button
-                key={index}
-                onClick={() => handleChoice(choice)}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                {choice.text}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      <p className="mb-4 text-center">{scene.text.replace("[spent]", spent)}</p>
+      <p className="text-center">Money: ${money}</p>
+      <div className="flex justify-center space-x-4 mt-4">
+        {scene.choices.map((choice, index) => (
+          <button
+            key={index}
+            onClick={() => handleChoice(choice)}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            {choice.text}
+          </button>
+        ))}
+      </div>
     </div>
+  </div>
   );
 };
 
