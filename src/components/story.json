@@ -1,73 +1,93 @@
 {
-    "scenes": {
-      "1": {
-        "text": "You are a successful individual with a family. One day, you pass by a casino and see a slot machine. It seems tempting. What do you do?",
-        "choices": [
-          { "text": "Enter the casino", "next": "2" },
-          { "text": "Walk away", "next": "win1" }
-        ]
-      },
-      "2": {
-        "text": "You step inside the casino. The bright lights and sounds captivate you. A slot machine beckons. Do you play?",
-        "choices": [
-          { "text": "Play the slot machine", "next": "3" },
-          { "text": "Leave the casino", "next": "win2" }
-        ]
-      },
-      "3": {
-        "text": "You play the slot machine. The reels spin, and you lose $20. What do you do next?",
-        "choices": [
-          { "text": "Play again", "next": "4" },
-          { "text": "Leave with your losses", "next": "lose2" }
-        ],
-        "moneyChange": -20
-      },
-      "4": {
-        "text": "You play again, losing another $20. The thrill is addictive. What now?",
-        "choices": [
-          { "text": "Play again", "next": "5" },
-          { "text": "Leave with your losses", "next": "lose2" }
-        ],
-        "moneyChange": -20
-      },
-      "5": {
-        "text": "You win $100! But the excitement lures you to keep playing. What do you do?",
-        "choices": [
-          { "text": "Play again", "next": "6" },
-          { "text": "Cash out and leave", "next": "win3" }
-        ],
-        "moneyChange": 100
-      },
-      "6": {
-        "text": "You keep playing. Over time, you lose everything you’ve won, plus more. Your wife and kids leave you. Your house and car are repossessed. You’ve hit rock bottom.",
-        "choices": [],
-        "outcome": "lose3"
-      },
-      "win1": {
-        "text": "You resist the temptation and walk away. Your family is proud of you, and life continues happily.",
-        "choices": [],
-        "outcome": "win"
-      },
-      "win2": {
-        "text": "You leave the casino, having spent nothing. You avoided a dangerous trap.",
-        "choices": [],
-        "outcome": "win"
-      },
-      "win3": {
-        "text": "You cashed out while ahead. You escaped the gambling trap this time.",
-        "choices": [],
-        "outcome": "win"
-      },
-      "lose2": {
-        "text": "You leave the casino with less money. The experience leaves you questioning your choices.",
-        "choices": [],
-        "outcome": "escaped"
-      },
-      "lose3": {
-        "text": "You lost everything at the price of your life’s work and loved ones.",
-        "choices": [],
-        "outcome": "lose"
-      }
+  "scenes": {
+    "1": {
+      "text": "You are a successful individual with a family. One day, you pass by a casino and see a slot machine. It seems tempting. What do you do?",
+      "choices": [
+        { "text": "Enter the casino", "next": "2" },
+        { "text": "Walk away", "next": "win1" }
+      ]
+    },
+    "2": {
+      "text": "You step inside the casino. The bright lights and sounds captivate you. A slot machine beckons. Do you play?",
+      "choices": [
+        { "text": "Play the slot machine", "next": "3" },
+        { "text": "Leave the casino", "next": "win2" }
+      ],
+      "moneyChange": -10
+    },
+    "3": {
+      "text": "You play the slot machine. The reels spin, and you lose $20. What do you do next?",
+      "choices": [
+        { "text": "Play again", "next": "4" },
+        { "text": "Leave with your losses", "next": "lose2" }
+      ],
+      "moneyChange": -10
+    },
+    "4": {
+      "text": "You play again, losing another $20. The thrill is addictive. What now?",
+      "choices": [
+        { "text": "Play again", "next": "5" },
+        { "text": "Leave with your losses", "next": "lose2" }
+      ],
+      "moneyChange": -10
+    },
+    "5": {
+      "text": "You win $100! But the excitement lures you to keep playing. What do you do?",
+      "choices": [
+        { "text": "Play again", "next": "6" },
+        { "text": "Cash out and leave", "next": "win3" }
+      ],
+      "moneyChange": 100
+    },
+    "6": {
+      "text": "You keep playing and lose everything. Now you have no money left. What do you do?",
+      "choices": [
+        { "text": "Sell your house for $200", "next": "7", "moneyChange": 200 },
+        { "text": "Sell your car for $100", "next": "8", "moneyChange": 100 },
+        { "text": "Give up", "next": "lose3" }
+      ]
+    },
+    "7": {
+      "text": "You sold your house and now have $200. The casino beckons you to continue. What do you do?",
+      "choices": [
+        { "text": "Play again", "next": "9" }
+      ]
+    },
+    "8": {
+      "text": "You sold your car and now have $100. The casino beckons you to continue. What do you do?",
+      "choices": [
+        { "text": "Play again", "next": "9" }
+      ]
+    },
+    "9": {
+      "text": "You lose everything again, including what you sold. You’ve hit rock bottom.",
+      "choices": [],
+      "outcome": "lose3"
+    },
+    "win1": {
+      "text": "You resist the temptation and walk away. Your family is proud of you, and life continues happily.",
+      "choices": [],
+      "outcome": "win"
+    },
+    "win2": {
+      "text": "You leave the casino, having spent nothing. You avoided a dangerous trap.",
+      "choices": [],
+      "outcome": "win"
+    },
+    "win3": {
+      "text": "You cashed out while ahead. You escaped the gambling trap this time.",
+      "choices": [],
+      "outcome": "win"
+    },
+    "lose2": {
+      "text": "You leave the casino with less money. The experience leaves you questioning your choices.",
+      "choices": [],
+      "outcome": "escaped"
+    },
+    "lose3": {
+      "text": "You lost everything, including your house, car, and dignity. This is the end.",
+      "choices": [],
+      "outcome": "lose"
     }
   }
-  
+}
