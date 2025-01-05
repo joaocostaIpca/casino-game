@@ -64,28 +64,7 @@ const App = () => {
           </button>
         </div>
       )}
-      {gameState === "talkToWife" && (
-        <div className="h-screen w-screen bg-gray-800 flex flex-col justify-center items-center text-white">
-          <h1 className="text-4xl font-bold mb-8">You talked to your wife. She is happy to see you home.</h1>
-          <button
-            onClick={() => setGameState("menu")}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Back to Menu
-          </button>
-        </div>
-      )}
-      {gameState === "goToWork" && (
-        <div className="h-screen w-screen bg-gray-800 flex flex-col justify-center items-center text-white">
-          <h1 className="text-4xl font-bold mb-8">You went to work. You earned some money and your wife is happy.</h1>
-          <button
-            onClick={() => setGameState("menu")}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Back to Menu
-          </button>
-        </div>
-      )}
+      
     </div>
   );
 };

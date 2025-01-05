@@ -1,7 +1,7 @@
 {
   "scenes": {
     "1": {
-      "text": "You are a successful individual with a family. One day, you pass by a casino and see a slot machine. It seems tempting. What do you do?",
+      "text": " You are a successful individual with a family. One day, you pass by a casino and see a slot machine. It seems tempting. What do you do?",
       "choices": [
         { "text": "Enter the casino", "next": "2" },
         { "text": "Walk away", "next": "win1" }
@@ -12,7 +12,7 @@
       "requiresSlotMachine": true,
       "choices": [
         { "text": "Ignore the warning and play", "next": "3" },
-        { "text": "Heed the warning and leave", "next": "win" }
+        { "text": "Heed the warning and leave", "next": "win1" }
       ],
       "moneyChange": -10
     },
@@ -43,49 +43,71 @@
       ],
       "moneyChange": -10
     },
-
     "6": {
       "text": "You play again, losing another $20. You are now $100 in the hole. What do you do?",
       "requiresSlotMachine": true,
       "choices": [
-        { "text": "Play again" },
-        { "text": "Leave with your losses", "next": "lose" }
+        { "text": "Play again", "next": "7" },
+        { "text": "Leave with your losses", "next": "lose2" }
       ],
       "moneyChange": -10
     },
+    "7": {
+      "text": "You have no more cash to play. Do you sell your car, your house, or stop playing?",
+      "choices": [
+        { "text": "Sell the car", "next": "8", "moneyChange": 100 },
+        { "text": "Sell the house", "next": "9", "moneyChange": 200 },
+        { "text": "Stop playing", "next": "lose3" }
+      ]
+    },
+    "8": {
+      "text": "You sold your car for $100. What do you do with the money?",
+      
+      "choices": [
+        { "text": "Play again", "next": "10", "moneyChange": -100 },
+        { "text": "Leave with your losses", "next": "lose2" }
+      ]
+    },
+    "9": {
+      "text": "You sold your house for $200. What do you do with the money?",
+      
+      "choices": [
+        { "text": "Play again", "next": "10", "moneyChange": -200 },
+        { "text": "Leave with your losses", "next": "lose2" }
+      ]
+    },
+    "10": {
+      "text": "After selling everything, you play again and lose it all. Your family leaves you. What now?",
+      "choices": [
+        { "text": "Reflect on your mistakes", "next": "lose" }
+      ]
+    },
 
-
+    "11": {
+      "text": "After selling everything, you play again and lose it all. Your family leaves you. What now?",
+      "choices": [
+        { "text": "Reflect on your mistakes", "next": "lose" }
+      ]
+    },
     "win1": {
       "text": "You walk away from the casino, feeling proud of your self-control. You go home to your family.",
       "outcome": "win",
-      "choices":[]
+      "choices": []
     },
-
-
     "lose": {
-      "text": "You gamble at what cost? Everything... You go home to your family, feeling regretful.",
+      "text": "You gamble at what cost? Everything... Your family has left you, and you have nothing left.",
       "outcome": "lose",
-      "choices":[]
+      "choices": []
     },
-
     "lose2": {
-  "text": "You leave the casino with your losses, feeling regretful. You go home to your family.",
-  "outcome": "lose2",
-  "choices": [] 
+      "text": "You leave the casino with your losses, feeling regretful. You go home to your family.",
+      "outcome": "lose2",
+      "choices": []
     },
-
-    "talkToWife": {
-      "text": "You talked to your wife. She is happy to see you home.",
-      "choices": [
-        { "text": "Back to Menu", "next": "menu" }
-      ]
-    },
-
-    "goToWork": {
-      "text": "You went to work. You earned some money and your wife is happy.",
-      "choices": [
-        { "text": "Back to Menu", "next": "menu" }
-      ]
+    "lose3": {
+      "text": "You chose to stop playing. Despite your losses, you go home and try to rebuild your life.",
+      "outcome": "lose3",
+      "choices": []
     }
   }
 }

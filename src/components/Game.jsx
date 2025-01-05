@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SlotMachine from "./SlotMachine";
 import storyData from "./story.json";
 import ResultPage from "./ResultPage";
+import TypingText from "./TypingText"; // Import TypingText component
 
 const Game = ({ onGameOver }) => {
   const [sceneId, setSceneId] = useState("1");
@@ -22,38 +23,42 @@ const Game = ({ onGameOver }) => {
 
     setScene(newScene);
 
+    // Reset resultMessage if transitioning back to a gameplay scene
+    if (!newScene.outcome) {
+      setResultMessage(null);
+    }
+
     // Handle outcome conditions dynamically
     if (newScene.outcome === "win") {
-      console.log("Outcome: Win");
       setResultMessage("You Win! You resisted temptation and walked away!");
     } else if (newScene.outcome === "lose") {
-      console.log("Outcome: Lose All Money");
       setResultMessage(
-        "You gamble at what cost? Everything... You go home to your family, feeling regretful."
+        "You gamble at what cost? Everything... Your family has left you, and you have nothing left."
       );
     } else if (newScene.outcome === "lose2") {
-      console.log("Outcome: Lose Some Money");
       setResultMessage(
         "You leave the casino with your losses, feeling regretful."
       );
-    } else if (newScene.outcome === "escaped") {
-      console.log("Outcome: Escaped");
+    } else if (newScene.outcome === "lose3") {
       setResultMessage(
-        "You Escaped! You got caught in gambling, but you managed to leave."
+        "You chose to stop playing. Despite your losses, you go home and try to rebuild your life."
       );
     }
   }, [sceneId]);
 
   // Handle slot machine scenes
   useEffect(() => {
-    if (money <= 0) {
+    if (money < 0) {
       console.log("Money depleted. Setting to Lose condition.");
       setSceneId("lose");
     }
   }, [money]);
 
   const handleChoice = (choice) => {
-    console.log("Choice made:", choice);
+    if (choice.moneyChange) {
+      setMoney((prev) => prev + choice.moneyChange); 
+    }
+
     if (scene.requiresSlotMachine && choice.text.toLowerCase().includes("play")) {
       setIsSpinning(true);
     } else {
@@ -85,10 +90,9 @@ const Game = ({ onGameOver }) => {
 
   // If a result message is set, render the ResultPage
   if (resultMessage) {
-    console.log("Rendering ResultPage with message:", resultMessage);
     return (
       <ResultPage
-        message={resultMessage}
+        message={resultMessage || "An unexpected outcome occurred."} // Default fallback message
         buttonText="Back to Menu"
         onButtonClick={() => onGameOver("menu")}
       />
@@ -112,7 +116,9 @@ const Game = ({ onGameOver }) => {
 
       {/* Text Box */}
       <div className="w-5/6 bg-gray-900 bg-opacity-75 text-white p-6 rounded-lg mb-4">
-        <p className="mb-4 text-center">{scene.text.replace("[spent]", spent)}</p>
+        <p className="mb-4 text-center">
+          <TypingText text={scene.text.replace("[spent]", spent)} speed={50} />
+        </p>
         <p className="text-center">Money: ${money}</p>
 
         {/* Choices */}
