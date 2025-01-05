@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { ref, set } from "firebase/database";
+import { auth, db } from "../firebase";
 
 const Register = ({ onRegister, onSwitchToLogin }) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    
+
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      onRegister();
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+    
+
+      onRegister(user);
     } catch (error) {
       console.error("Registration error:", error); // Log the error to the console
       setError(error.message);
@@ -22,6 +30,7 @@ const Register = ({ onRegister, onSwitchToLogin }) => {
     <div className="h-screen w-screen bg-gray-800 flex flex-col justify-center items-center text-white">
       <h1 className="text-4xl font-bold mb-8">Register</h1>
       <form onSubmit={handleRegister} className="flex flex-col space-y-4">
+      
         <input
           type="email"
           placeholder="Email"

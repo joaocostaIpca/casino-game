@@ -10,8 +10,9 @@ const Login = ({ onLogin, onSwitchToRegister }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      onLogin();
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      onLogin(user);
     } catch (error) {
       console.error("Login error:", error); // Log the error to the console
       setError(error.message);

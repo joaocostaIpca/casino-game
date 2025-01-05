@@ -1,18 +1,32 @@
 import React, { useState } from "react";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { ref, set } from "firebase/database";
 import { db } from "./firebase";
 import GameMenu from "./components/GameMenu";
 import Game from "./components/Game";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import InsertName from "./components/InsertName";
 
 const App = () => {
-  const [gameState, setGameState] = useState("login"); // "login", "register", "menu", "game", "gameOver", "talkToWife", "goToWork"
+  const [gameState, setGameState] = useState("login"); // "login", "register", "insertName", "menu", "game", "gameOver", "talkToWife", "goToWork"
   const [gameResult, setGameResult] = useState("");
   const [money, setMoney] = useState(0);
+  const [userId, setUserId] = useState(null);
 
-  const handleLogin = () => setGameState("menu");
-  const handleRegister = () => setGameState("login");
+  const handleLogin = (user) => {
+    setUserId(user.uid);
+    setGameState("insertName");
+  };
+
+  const handleRegister = (user) => {
+    setUserId(user.uid);
+    setGameState("login");
+  };
+
+  const handleNameInserted = () => {
+    setGameState("menu");
+  };
+
   const handleStartGame = () => setGameState("game");
 
   const handleGameOver = async (result, spentMoney) => {
@@ -20,18 +34,19 @@ const App = () => {
     setMoney(spentMoney);
     setGameState("gameOver");
 
-    // Save money to Firestore
-    const userDoc = doc(db, "users", "user1"); // Replace "user1" with the actual user ID
-    await setDoc(userDoc, { money: spentMoney }, { merge: true });
+    // Save money to Realtime Database
+    if (userId) {
+      const userRef = ref(db, 'users/' + userId);
+      await set(userRef, { money: spentMoney }, { merge: true });
+    }
   };
 
-  const handleTalkToWife = () => setGameState("talkToWife");
-  const handleGoToWork = () => setGameState("goToWork");
 
   return (
     <div>
       {gameState === "login" && <Login onLogin={handleLogin} onSwitchToRegister={() => setGameState("register")} />}
       {gameState === "register" && <Register onRegister={handleRegister} onSwitchToLogin={() => setGameState("login")} />}
+      {gameState === "insertName" && <InsertName userId={userId} onNameInserted={handleNameInserted} />}
       {gameState === "menu" && <GameMenu onStart={handleStartGame} />}
       {gameState === "game" && <Game onGameOver={handleGameOver} />}
       {gameState === "gameOver" && (
