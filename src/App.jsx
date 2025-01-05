@@ -4,6 +4,7 @@ import { db } from "./firebase";
 import GameMenu from "./components/GameMenu";
 import Game from "./components/Game";
 import Login from "./components/Login";
+import Register from "./components/Register";
 
 const App = () => {
   const [gameState, setGameState] = useState("login"); // "login", "register", "menu", "game", "gameOver", "talkToWife", "goToWork"
