@@ -4,12 +4,11 @@ const TypingText = ({ text, speed = 50, onComplete }) => {
   const [displayedText, setDisplayedText] = useState("");
 
   useEffect(() => {
-    let index = -1;
+    let index = 0; // Initialize index to 0
     setDisplayedText(""); // Clear displayed text when `text` changes
 
     const interval = setInterval(() => {
-      
-      if (index < text.length-1) {
+      if (index < text.length - 1) {
         setDisplayedText((prev) => prev + text[index]);
         index++;
       } else {

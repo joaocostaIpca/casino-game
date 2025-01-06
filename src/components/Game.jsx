@@ -56,10 +56,13 @@ const Game = ({ onGameOver }) => {
 
   const handleChoice = (choice) => {
     if (choice.moneyChange) {
-      setMoney((prev) => prev + choice.moneyChange); 
+      setMoney((prev) => prev + choice.moneyChange);
     }
 
-    if (scene.requiresSlotMachine && choice.text.toLowerCase().includes("play")) {
+    if (
+      scene.requiresSlotMachine &&
+      choice.text.toLowerCase().includes("play")
+    ) {
       setIsSpinning(true);
     } else {
       setSceneId(choice.next);
@@ -104,16 +107,69 @@ const Game = ({ onGameOver }) => {
       className="h-screen w-screen flex flex-col justify-end items-center bg-cover bg-center"
       style={{ backgroundImage: 'url("/public/background.png")' }}
     >
+      {/* Show Image if scene is 2, 8, or 9 (Entering the casino) */}
+      {(sceneId === "2" || sceneId === "8" || sceneId === "9") && (
+        <div className="absolute top-1/2 transform -translate-y-1/2">
+          <img
+            src="/public/stand1.png"
+            alt="placehoder"
+            className="rounded-lg shadow-lg"
+          />
+        </div>
+      )}
+      {sceneId === "7" && (
+        <div className="absolute top-1/2 transform -translate-y-1/2">
+          <img
+            src="/public/lose4.png"
+            alt="placehoder"
+            className="rounded-lg shadow-lg"
+          />
+        </div>
+      )}
+      {sceneId === "5" && (
+        <div className="absolute top-1/2 transform -translate-y-1/2">
+          <img
+            src="/public/lose3.png"
+            alt="placehoder"
+            className="rounded-lg shadow-lg"
+          />
+        </div>
+      )}
+      {sceneId === "4" && (
+        <div className="absolute top-1/2 transform -translate-y-1/2">
+          <img
+            src="/public/lose2.png"
+            alt="placehoder"
+            className="rounded-lg shadow-lg"
+          />
+        </div>
+      )}
+      {/* Show Image if scene is 3, 4, 5, 6, or 7 (Losing Images) */}
+      {(sceneId === "3" ||
+        sceneId === "6" ||
+        sceneId === "10" ||
+        sceneId === "11") && (
+        <div className="absolute top-1/2 transform -translate-y-1/2">
+          <img
+            src="/public/lose1.png"
+            alt="Losing the Game"
+            className="rounded-lg shadow-lg"
+          />
+        </div>
+      )}
       {/* Slot Machine */}
       {isSpinning && (
         <div
           className="absolute"
-          style={{ bottom: "140px", right: "10%", transform: "translateY(-50%)" }}
+          style={{
+            bottom: "140px",
+            right: "10%",
+            transform: "translateY(-50%)",
+          }}
         >
           <SlotMachine onResult={handleSlotResult} />
         </div>
       )}
-
       {/* Text Box */}
       <div className="w-5/6 bg-gray-900 bg-opacity-75 text-white p-6 rounded-lg mb-4">
         <p className="mb-4 text-center">
